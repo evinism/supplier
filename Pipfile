@@ -10,6 +10,7 @@ black = "*"
 flake8 = "*"
 twine = "*"
 contextvars = "*"
+importlib-metadata = "*"
 
 [pipenv]
 allow_prereleases = true
