@@ -4,13 +4,13 @@ from contextlib import contextmanager
 from typing import List
 
 
-class Provider:
+class Supplier:
     def __init__(self, name):
         self.contextvar = contextvars.ContextVar(name)
 
     @contextmanager
-    def use(self, spark):
-        token = self.contextvar.set(spark)
+    def use(self, value):
+        token = self.contextvar.set(value)
         try:
             yield None
         finally:
@@ -20,15 +20,15 @@ class Provider:
         return self.contextvar.get()
 
 
-def provide(*providers: List[Provider]):
-    def provide_inner(fn):
+def supply(*suppliers: List[Supplier]):
+    def supply_inner(fn):
         # No good way to detect whether the decorated method is an instance method
         # Instead we just check to see if the first argument has name "self"
         params = inspect.signature(fn).parameters
         should_keep_first_arg_in_place = len(params) and next(iter(params)) == "self"
 
         def wrapped(*args, **kwargs):
-            prepended = tuple(provider.get() for provider in providers)
+            prepended = tuple(supplier.get() for supplier in suppliers)
             if not should_keep_first_arg_in_place:
                 new_args = prepended + args
             else:
@@ -37,4 +37,4 @@ def provide(*providers: List[Provider]):
 
         return wrapped
 
-    return provide_inner
+    return supply_inner

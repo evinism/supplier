@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+supplier = {editable = true, path = "."}
+pytest = "*"
+black = "*"
+flake8 = "*"
+twine = "*"
+contextvars = "*"
+
+[pipenv]
+allow_prereleases = true
