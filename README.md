@@ -6,16 +6,35 @@ This is for you!
 
 ### Example
 
+After:
+```py
+def outer_function(config):
+  middle_function(config)
+
+def middle_function(config):
+  inner_function(config)
+  
+def inner_function(config):
+  # To supply config here, we have to manually pass the config through 2 layers of function calls!
+  do_something_based_on(config)
+  
+outer_function(config)
+```
+
+After:
 ```py
 from supplier import Supplier, supply
-
 config_supplier = Supplier('config')
 
 def outer_function():
-  inner_function()
+  middle_function()
 
+def middle_function()
+  inner_function()
+  
 @supply(config_supplier)
 def inner_function(config):
+  # No longer have to manually pass the config through 2 layers!
   do_something_based_on(config)
 
 with config_supplier.use(Config()):
