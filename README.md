@@ -49,3 +49,15 @@ def doubly_provided_func(foo, bar, arg):
 with foo_supplier.use("foo"), bar_supplier.use("bar"):
   doubly_provided_func("arg")
 ```
+
+## @supply keeps `self` argument in the same place.
+
+When using supply to decorate class method, supply keeps the `self` argument in the same place, for ease of use.
+
+```py
+class A(Printer):
+  @supply(foo_supplier):
+  def print_foo(self, foo):
+    self.print(foo)
+```
+
