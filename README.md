@@ -6,7 +6,9 @@ This is for you!
 
 ### Example
 
-After:
+Here's a basic before/after for passing variables deeply.
+
+Before:
 ```py
 def outer_function(config):
   middle_function(config)
