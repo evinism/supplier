@@ -20,7 +20,7 @@ def inner_function(config):
   # To supply config here, we have to manually pass the config through 2 layers of function calls!
   do_something_based_on(config)
   
-outer_function(config)
+outer_function(Config())
 ```
 
 After:
