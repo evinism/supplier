@@ -31,7 +31,7 @@ config_supplier = Supplier('config')
 def outer_function():
   middle_function()
 
-def middle_function()
+def middle_function():
   inner_function()
   
 @supply(config_supplier)
